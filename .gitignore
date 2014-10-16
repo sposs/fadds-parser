@@ -1,0 +1,5 @@
+sample/
+*.pyc
+
+# Mac OSX
+.DS_Store
