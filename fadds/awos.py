@@ -6,10 +6,8 @@ from fadds.base_file import BaseFile, BaseData
 
 
 class AWOSParser(BaseFile):
-    """ Parse AWOS file using iterator
-
-    Does not parse REMARK fields
-
+    """
+    Parse AWOS file using iterator
     """
     def __init__(self, awos_file):
         super(AWOSParser, self).__init__(awos_file)
