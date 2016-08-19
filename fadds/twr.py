@@ -31,7 +31,7 @@ class TWR(BaseData):
         self.infodate = ""
         self.site_num = ""
         self.term_facility_type = ""
-        self.freqs = []
+        self.freqs = {"freqs": [], "freqs_untrunc": []}
 
     def special_data(self, record_type, line):
         """
@@ -46,14 +46,21 @@ class TWR(BaseData):
             self.term_facility_type = self.get_value(line, 239, 12).strip()
         elif record_type == self.COMFREQ:
             d = {"freqs": [], "freqs_untrunc": []}
+            freqs = []
+            freqs_untrunc = []
             period = 94
             for i in range(9):
                 val = self.get_value(line, 9+period*i, 44).strip()
                 use = self.get_value(line, 44+period*i, 50).strip()
-                d["freqs"].append({"val": val, "use": use})
+                if val:
+                    freqs.append({"val": val, "use": use})
 
             for i in range(9):
-                d["freqs_untrunc"].append(self.get_value(line, 855+i*60, 60))
-            self.freqs.append(d)
+                val = self.get_value(line, 855+i*60, 60)
+                if val:
+                    freqs_untrunc.append(val)
+
+            self.freqs['freqs'].extend(freqs)
+            self.freqs['freqs_untrunc'].extend(freqs_untrunc)
 
 
