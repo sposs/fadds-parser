@@ -30,7 +30,7 @@ class AWOS(BaseData):
 
     def special_data(self, record_type, line):
         if record_type == self.DATA:
-            self.sensor_type = AWOS.get_value(line, 10, 10)
-            self.status = AWOS.get_value(line, 20, 1)
+            self.sensor_type = self.get_value(line, 10, 10)
+            self.status = self.get_value(line, 20, 1)
         else:
-            self.remarks.append(AWOS.get_value(line, self.key_length+5, len(line)-1))
+            self.remarks.append(self.get_value(line, self.key_length+5, len(line)-1))
