@@ -51,8 +51,20 @@ class TWR(BaseData):
             period = 94
             for i in range(9):
                 val = self.get_value(line, 9+period*i, 44).strip()
-                use = self.get_value(line, 44+period*i, 50).strip()
+                info = ""
+                if "(" in val:
+                    items = val.split("(")
+                    info = "(" + "".join(items[1:])
+                    val = items[0]
+                elif " " in val:
+                    items = val.split()
+                    info = " ".join(items[1:])
+                    val = items[0]
+                use = self.get_value(line, 44+period*i, 50).strip() + " "
                 if val:
+                    if info not in use:
+                        use += info
+                    use = use.strip()
                     freqs.append({"val": val, "use": use})
 
             for i in range(9):
