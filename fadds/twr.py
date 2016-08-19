@@ -65,7 +65,7 @@ class TWR(BaseData):
                     if info not in use:
                         use += info
                     use = use.strip()
-                    freqs.append({"val": val, "use": use})
+                    freqs.append({"val": float(val), "use": use})
 
             for i in range(9):
                 val = self.get_value(line, 855+i*60, 60)
