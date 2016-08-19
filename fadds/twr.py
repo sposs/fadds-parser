@@ -34,6 +34,12 @@ class TWR(BaseData):
         self.freqs = []
 
     def special_data(self, record_type, line):
+        """
+        We only look at genral info and communication frequencies
+        :param str record_type:
+        :param str line:
+        :return: None
+        """
         if record_type == self.DATA:
             self.infodate = self.get_value(line, 9, 10)
             self.site_num = self.get_value(line, 19, 11).strip()

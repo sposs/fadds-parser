@@ -27,6 +27,12 @@ class AWOS(BaseData):
         self.remarks = []
 
     def special_data(self, record_type, line):
+        """
+        Extraxt general info and remarks
+        :param str record_type:
+        :param str line:
+        :return: None
+        """
         if record_type == self.DATA:
             self.sensor_type = self.get_value(line, 10, 10)
             self.status = self.get_value(line, 20, 1)
