@@ -59,14 +59,6 @@ class BaseData(object):
         record_type = cls.get_value(line, 1, cls.key_length)
         return record_type
 
-    def __eq__(self, other):
-        """
-        Can be useful to compare 2 objects, just in case
-        :param BaseData other:
-        :return: bool
-        """
-        return self.identifier == other.identifier and self.__class__ == other.__class__
-
     def add_record(self, line):
         """
         Add the object record
@@ -89,4 +81,13 @@ class BaseData(object):
         raise NotImplementedError
 
     def __repr__(self):
-        return "%s" % self.identifier
+        return "%s: %s" % (self.__class__, self.identifier)
+
+    def __eq__(self, other):
+        """
+        Can be useful to compare 2 objects, just in case
+        :param BaseData other:
+        :return: bool
+        """
+        return self.identifier == other.identifier and self.__class__ == other.__class__
+
