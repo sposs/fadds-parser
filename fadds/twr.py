@@ -4,6 +4,9 @@ Author: @sposs
 Date: 19.08.16
 """
 from fadds.base_file import BaseFile, BaseData
+import re
+
+value_re = re.compile(r"(?P<value>[0-9]+\.*[0-9]*)(?P<use>[A-Z ()0-9-/&]*)")
 
 
 class TWRParser(BaseFile):
@@ -52,14 +55,11 @@ class TWR(BaseData):
             for i in range(9):
                 val = self.get_value(line, 9+period*i, 44).strip()
                 info = ""
-                if "(" in val:
-                    items = val.split("(")
-                    info = "(" + "".join(items[1:])
-                    val = items[0]
-                elif " " in val:
-                    items = val.split()
-                    info = " ".join(items[1:])
-                    val = items[0]
+                match = value_re.match(val)
+                if match:
+                    val = match.group("value")
+                    if len(match.groups()) > 1:
+                        info = match.group("use").strip()
                 use = self.get_value(line, 44+period*i, 50).strip()
                 if val:
                     freqs.append({"val": float(val), "type": use, "use": info})
