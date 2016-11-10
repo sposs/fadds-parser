@@ -24,3 +24,4 @@ class TestTWR(unittest.TestCase):
         for twr in self.parser:
             if twr.identifier == "JFK":
                 print twr.freqs
+                print twr.twr_hours

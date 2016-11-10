@@ -34,6 +34,14 @@ class TWR(BaseData):
         self.infodate = ""
         self.site_num = ""
         self.term_facility_type = ""
+        self.pmsv_hours = ""
+        self.macp_hours = ""
+        self.mil_hours = ""
+        self.pri_app_hours = ""
+        self.sec_app_hours = ""
+        self.pri_dep_hours = ""
+        self.sec_dep_hours = ""
+        self.twr_hours = ""
         self.freqs = {"freqs": [], "freqs_untrunc": []}
 
     def special_data(self, record_type, line):
@@ -72,4 +80,12 @@ class TWR(BaseData):
             self.freqs['freqs'].extend(freqs)
             self.freqs['freqs_untrunc'].extend(freqs_untrunc)
 
-
+        elif record_type == self.HOURS:
+            self.pmsv_hours = self.get_value(line, 9, 200)
+            self.macp_hours = self.get_value(line, 209, 200)
+            self.mil_hours = self.get_value(line, 409, 200)
+            self.pri_app_hours = self.get_value(line, 609, 200)
+            self.sec_app_hours = self.get_value(line, 809, 200)
+            self.pri_dep_hours = self.get_value(line, 1009, 200)
+            self.sec_dep_hours = self.get_value(line, 1209, 200)
+            self.twr_hours = self.get_value(line, 1409, 200)
