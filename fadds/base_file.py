@@ -14,7 +14,7 @@ class BaseFile(object):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         last_obj = None  # when we start, we have no object in memory
         while 1:
             last_pos = self.file.tell()  # store where in the file we are

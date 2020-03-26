@@ -3,3 +3,7 @@ sample/
 
 # Mac OSX
 .DS_Store
+.eggs
+dist
+build
+*.egg_info
