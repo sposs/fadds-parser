@@ -25,4 +25,5 @@ class TestTWR(unittest.TestCase):
             print(apt.runways)
             print(apt.unicom)
             print(apt.ctaf)
+            print(apt.owner)
 
