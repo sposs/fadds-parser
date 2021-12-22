@@ -144,10 +144,10 @@ class APT(BaseData):
 
     @property
     def owner(self):
-        return {"name": self.owner_name, "address": self.owner_address, "city": self.owner_city,
+        return {"name": self.owner_name, "address1": self.owner_address, "address2": self.owner_city,
                 "phone": self.owner_phone}
 
     @property
     def manager(self):
-        return {"name": self.manager_name, "address": self.manager_address, "city": self.manager_city,
+        return {"name": self.manager_name, "address1": self.manager_address, "address2": self.manager_city,
                 "phone": self.manager_phone}
