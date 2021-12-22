@@ -26,4 +26,5 @@ class TestTWR(unittest.TestCase):
             print(apt.unicom)
             print(apt.ctaf)
             print(apt.owner)
+            print(apt.icao_code)
 
