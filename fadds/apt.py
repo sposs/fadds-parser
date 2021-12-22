@@ -99,8 +99,14 @@ class APT(BaseData):
             self.airport_status = self.get_value(line, 841, 2)
             self.joint_civ_mil = self.get_value(line, 880, 1)
             # skip some more stuff
-            self.unicom = float(self.get_value(line, 982, 7))
-            self.ctaf = float(self.get_value(line, 989, 7))
+            try:
+                self.unicom = float(self.get_value(line, 982, 7))
+            except ValueError:
+                self.unicom = None
+            try:
+                self.ctaf = float(self.get_value(line, 989, 7))
+            except ValueError:
+                self.ctaf = None
             self.icao_code = self.get_value(line, 1211, 7)
         if record_type == self.ATT:
             return
