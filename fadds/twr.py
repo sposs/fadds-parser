@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Author: @sposs
 Date: 19.08.16
@@ -17,9 +16,9 @@ class TWRParser(BaseFile):
 
 class TWR(BaseData):
     key_length = 4
-    NEW = "TWR1"
+    identifier_length = 4
 
-    DATA = 'TWR1'
+    NEW = "TWR1"
     HOURS = 'TWR2'
     COMFREQ = 'TWR3'
     SERVICES = 'TWR4'
@@ -33,6 +32,7 @@ class TWR(BaseData):
         super(TWR, self).__init__()
         self.infodate = ""
         self.site_num = ""
+        self.airport_identifier = ""
         self.term_facility_type = ""
         self.pmsv_hours = ""
         self.macp_hours = ""
@@ -46,34 +46,35 @@ class TWR(BaseData):
 
     def special_data(self, record_type, line):
         """
-        We only look at genral info and communication frequencies
+        We only look at general info and communication frequencies
         :param str record_type:
         :param str line:
         :return: None
         """
-        if record_type == self.DATA:
+        if record_type == self.NEW:
             self.infodate = self.get_value(line, 9, 10)
-            self.site_num = self.get_value(line, 19, 11).strip()
-            self.term_facility_type = self.get_value(line, 239, 12).strip()
+            self.site_num = self.get_value(line, 19, 11)
+            self.term_facility_type = self.get_value(line, 239, 12)
+            self.airport_identifier = self.get_value(line, 256, 4)
+
         elif record_type == self.COMFREQ:
-            d = {"freqs": [], "freqs_untrunc": []}
             freqs = []
             freqs_untrunc = []
-            period = 94
+            period = 50+44
             for i in range(9):
-                val = self.get_value(line, 9+period*i, 44).strip()
+                val = self.get_value(line, 9+period*i, 44)
                 info = ""
                 match = value_re.match(val)
                 if match:
                     val = match.group("value")
                     if len(match.groups()) > 1:
                         info = match.group("use").strip()
-                use = self.get_value(line, 44+period*i, 50).strip()
+                use = self.get_value(line, 53+period*i, 50)
                 if val:
                     freqs.append({"val": float(val), "type": use, "use": info})
 
             for i in range(9):
-                val = self.get_value(line, 855+i*60, 60)
+                val = self.get_value(line, 915+i*60, 60)
                 if val:
                     freqs_untrunc.append(val)
 

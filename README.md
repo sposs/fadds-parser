@@ -9,4 +9,5 @@ Under the heading:
 Currently supports:
 ```
 AWOS.txt
+TWR.txt
 ```

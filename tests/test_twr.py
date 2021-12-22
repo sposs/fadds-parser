@@ -23,5 +23,6 @@ class TestTWR(unittest.TestCase):
     def test_get_info(self):
         for twr in self.parser:
             if twr.identifier == "JFK":
-                print twr.freqs
-                print twr.twr_hours
+                print(twr.airport_identifier)
+                print(twr.freqs)
+                print(twr.twr_hours)

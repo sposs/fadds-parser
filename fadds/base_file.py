@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Author: @sposs
 Date: 19.08.16
@@ -35,6 +34,7 @@ class BaseFile(object):
 
 class BaseData(object):
     key_length = 4
+    identifier_length = 4
     NEW = ""
 
     def __init__(self):
@@ -68,7 +68,7 @@ class BaseData(object):
         record_type = self.get_record_type(line)
         if record_type == self.NEW:
             self.record_type = self.__class__.get_value(line, 1, self.key_length)
-            self.identifier = self.__class__.get_value(line, self.key_length+1, 4)  # assume identifier length is 4
+            self.identifier = self.__class__.get_value(line, self.key_length+1, self.identifier_length)
         self.special_data(record_type, line)  # for each object, we have a special data handling (template pattern)
 
     def special_data(self, record_type, line):
