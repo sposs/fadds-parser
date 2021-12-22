@@ -117,30 +117,30 @@ class APT(BaseData):
             }
             rwy["left_threshold"]["ident"] = self.get_value(line, 66, 3)
             rwy["left_threshold"]["geo_orientation"] = self.get_value(line, 69, 3)
-            rwy["left_threshold"]["ils"] = self.get_value(line, 72, 10)
-            rwy["left_threshold"]["has_ils"] = "yes" if len(rwy["left_threshold"]["ils"]) else "no"
+            rwy["left_threshold"]["ils_cat"] = self.get_value(line, 72, 10)
+            rwy["left_threshold"]["has_ils"] = "yes" if len(rwy["left_threshold"]["ils_cat"]) else "no"
             rwy["left_threshold"]["lat"] = parse_coordinates(self.get_value(line, 89, 15))
-            rwy["left_threshold"]["lat_sec"] = self.get_value(line, 104, 12)
+            #rwy["left_threshold"]["lat_sec"] = self.get_value(line, 104, 12)
             rwy["left_threshold"]["lon"] = parse_coordinates(self.get_value(line, 116, 15))
-            rwy["left_threshold"]["lon_sec"] = self.get_value(line, 131, 12)
+            #rwy["left_threshold"]["lon_sec"] = self.get_value(line, 131, 12)
             rwy["right_threshold"]["ident"] = self.get_value(line, 288, 3)
             rwy["right_threshold"]["geo_orientation"] = self.get_value(line, 291, 3)
-            rwy["right_threshold"]["ils"] = self.get_value(line, 294, 10)
-            rwy["right_threshold"]["has_ils"] = "yes" if len(rwy["right_threshold"]["ils"]) else "no"
+            rwy["right_threshold"]["ils_cat"] = self.get_value(line, 294, 10)
+            rwy["right_threshold"]["has_ils"] = "yes" if len(rwy["right_threshold"]["ils_cat"]) else "no"
             rwy["right_threshold"]["lat"] = parse_coordinates(self.get_value(line, 311, 15))
-            rwy["right_threshold"]["lat_sec"] = self.get_value(line, 326, 12)
+            #rwy["right_threshold"]["lat_sec"] = self.get_value(line, 326, 12)
             rwy["right_threshold"]["lon"] = parse_coordinates(self.get_value(line, 338, 15))
-            rwy["right_threshold"]["lon_sec"] = self.get_value(line, 353, 12)
+            #rwy["right_threshold"]["lon_sec"] = self.get_value(line, 353, 12)
             rwy["left_threshold"]["tora"] = self.get_value(line, 699, 5)
             rwy["left_threshold"]["toda"] = self.get_value(line, 704, 5)
             rwy["left_threshold"]["asda"] = self.get_value(line, 709, 5)
             rwy["left_threshold"]["lda"] = self.get_value(line, 714, 5)
-            rwy["left_threshold"]["lahso"] = self.get_value(line, 719, 5)
+            #rwy["left_threshold"]["lahso"] = self.get_value(line, 719, 5)
             rwy["right_threshold"]["tora"] = self.get_value(line, 990, 5)
             rwy["right_threshold"]["toda"] = self.get_value(line, 995, 5)
             rwy["right_threshold"]["asda"] = self.get_value(line, 1000, 5)
             rwy["right_threshold"]["lda"] = self.get_value(line, 1005, 5)
-            rwy["right_threshold"]["lahso"] = self.get_value(line, 1010, 5)
+            #rwy["right_threshold"]["lahso"] = self.get_value(line, 1010, 5)
 
             self.runways.append(rwy)
         if record_type == self.RMK:
