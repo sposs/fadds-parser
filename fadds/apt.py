@@ -91,10 +91,16 @@ class APT(BaseData):
             self.lon_formatted = parse_coordinates(self.get_value(line, 551, 15))
             self.lon_secs = self.get_value(line, 566, 12)
             self.ref_point_det_meth = self.get_value(line, 578, 1)
-            self.elevation_ft = float(self.get_value(line, 579, 7))
+            try:
+                self.elevation_ft = float(self.get_value(line, 579, 7))
+            except ValueError:
+                self.elevation_ft = None
             self.elevation_det_meth = self.get_value(line, 586, 1)
             self.mag_var = self.get_value(line, 587, 3)
-            self.mag_var_epoch = int(self.get_value(line, 590, 4))
+            try:
+                self.mag_var_epoch = int(self.get_value(line, 590, 4))
+            except ValueError:
+                self.mag_var_epoch = None
             # skip some stuff
             self.airport_status = self.get_value(line, 841, 2)
             self.joint_civ_mil = self.get_value(line, 880, 1)
