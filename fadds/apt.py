@@ -135,7 +135,7 @@ class APT(BaseData):
             rwy["left_threshold"]["dthr_lat"] = parse_coordinates(self.get_value(line, 157, 15))
             rwy["left_threshold"]["lon"] = parse_coordinates(self.get_value(line, 116, 15))
             rwy["left_threshold"]["dthr_lon"] = parse_coordinates(self.get_value(line, 184, 15))
-            rwy["left_threshold"]["threshold_dist"] = float(self.get_value(line, 218, 4)) * 0.3048
+            rwy["left_threshold"]["threshold_dist"] = float(self.get_value(line, 218, 4)) * 0.3048 if self.get_value(line, 218, 4) else None
             rwy["right_threshold"]["ident"] = self.get_value(line, 288, 3)
             rwy["right_threshold"]["geo_orientation"] = self.get_value(line, 291, 3)
             rwy["right_threshold"]["ils_cat"] = self.get_value(line, 294, 10)
@@ -144,7 +144,7 @@ class APT(BaseData):
             rwy["right_threshold"]["dthr_lat"] = parse_coordinates(self.get_value(line, 379, 15))
             rwy["right_threshold"]["lon"] = parse_coordinates(self.get_value(line, 338, 15))
             rwy["right_threshold"]["dthr_lon"] = parse_coordinates(self.get_value(line, 406, 15))
-            rwy["right_threshold"]["threshold_dist"] = float(self.get_value(line, 440, 4)) * 0.3048
+            rwy["right_threshold"]["threshold_dist"] = float(self.get_value(line, 440, 4)) * 0.3048 if self.get_value(line, 440, 4) else None
             try:
                 rwy["left_threshold"]["tora"] = float(self.get_value(line, 699, 5))
             except ValueError:
