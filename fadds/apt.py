@@ -7,6 +7,9 @@ Date: 21.12.21
 """
 from fadds.base_file import BaseFile, BaseData
 from fadds.utils import parse_coordinates
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class APTParser(BaseFile):
@@ -127,6 +130,7 @@ class APT(BaseData):
                 "left_threshold": {},
                 "right_threshold": {}
             }
+
             rwy["left_threshold"]["ident"] = self.get_value(line, 66, 3)
             rwy["left_threshold"]["geo_orientation"] = self.get_value(line, 69, 3)
             rwy["left_threshold"]["ils_cat"] = self.get_value(line, 72, 10)
@@ -179,7 +183,7 @@ class APT(BaseData):
             except ValueError:
                 rwy["right_threshold"]["lda"] = None
             #rwy["right_threshold"]["lahso"] = self.get_value(line, 1010, 5)
-
+            logger.debug("rwy: %s", rwy)
             self.runways.append(rwy)
         if record_type == self.RMK:
             return
