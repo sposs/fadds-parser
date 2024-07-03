@@ -118,7 +118,11 @@ class APT(BaseData):
             except ValueError:
                 self.ctaf = None
             self.icao_code = self.get_value(line, 1211, 7)
-            self.traffic_pattern_alt = self.get_value(line, 594, 4)
+            try:
+                self.traffic_pattern_alt = float(self.get_value(line, 594, 4))
+            except ValueError:
+                logger.exception("Bad traffic pattern alt %s", self.get_value(line, 594, 4))
+                self.traffic_pattern_alt = None
         if record_type == self.ATT:
             return
         if record_type == self.RWY:
