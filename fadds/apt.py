@@ -126,6 +126,7 @@ class APT(BaseData):
                 "length_ft": float(self.get_value(line, 24, 5)),
                 "width_ft": float(self.get_value(line, 29, 4)),
                 "surface_type": self.get_value(line, 33, 12),
+                "pcn": self.get_value(line, 50, 12),
                 "light": self.get_value(line, 61, 5),
                 "left_threshold": {},
                 "right_threshold": {}
@@ -150,36 +151,36 @@ class APT(BaseData):
             rwy["right_threshold"]["dthr_lon"] = parse_coordinates(self.get_value(line, 406, 15))
             rwy["right_threshold"]["threshold_dist"] = float(self.get_value(line, 440, 4)) * 0.3048 if self.get_value(line, 440, 4) else None
             try:
-                rwy["left_threshold"]["tora"] = float(self.get_value(line, 699, 5))
+                rwy["left_threshold"]["tora"] = float(self.get_value(line, 699, 5)) * 0.3048
             except ValueError:
                 rwy["left_threshold"]["tora"] = None
             try:
-                rwy["left_threshold"]["toda"] = float(self.get_value(line, 704, 5))
+                rwy["left_threshold"]["toda"] = float(self.get_value(line, 704, 5)) * 0.3048
             except ValueError:
                 rwy["left_threshold"]["toda"] = None
             try:
-                rwy["left_threshold"]["asda"] = float(self.get_value(line, 709, 5))
+                rwy["left_threshold"]["asda"] = float(self.get_value(line, 709, 5)) * 0.3048
             except ValueError:
                 rwy["left_threshold"]["asda"] = None
             try:
-                rwy["left_threshold"]["lda"] = float(self.get_value(line, 714, 5))
+                rwy["left_threshold"]["lda"] = float(self.get_value(line, 714, 5)) * 0.3048
             except ValueError:
                 rwy["left_threshold"]["lda"] = None
             #rwy["left_threshold"]["lahso"] = self.get_value(line, 719, 5)
             try:
-                rwy["right_threshold"]["tora"] = float(self.get_value(line, 990, 5))
+                rwy["right_threshold"]["tora"] = float(self.get_value(line, 990, 5)) * 0.3048
             except ValueError:
                 rwy["right_threshold"]["tora"] = None
             try:
-                rwy["right_threshold"]["toda"] = float(self.get_value(line, 995, 5))
+                rwy["right_threshold"]["toda"] = float(self.get_value(line, 995, 5)) * 0.3048
             except ValueError:
                 rwy["right_threshold"]["toda"] = None
             try:
-                rwy["right_threshold"]["asda"] = float(self.get_value(line, 1000, 5))
+                rwy["right_threshold"]["asda"] = float(self.get_value(line, 1000, 5)) * 0.3048
             except ValueError:
                 rwy["right_threshold"]["asda"] = None
             try:
-                rwy["right_threshold"]["lda"] = float(self.get_value(line, 1005, 5))
+                rwy["right_threshold"]["lda"] = float(self.get_value(line, 1005, 5)) * 0.3048
             except ValueError:
                 rwy["right_threshold"]["lda"] = None
             #rwy["right_threshold"]["lahso"] = self.get_value(line, 1010, 5)
