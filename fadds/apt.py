@@ -65,6 +65,7 @@ class APT(BaseData):
         self.ctaf = ""
         self.icao_code = ""
         self.runways = []
+        self.traffic_pattern_alt = None
 
     def special_data(self, record_type, line):
         if record_type == self.NEW:
@@ -117,6 +118,7 @@ class APT(BaseData):
             except ValueError:
                 self.ctaf = None
             self.icao_code = self.get_value(line, 1211, 7)
+            self.traffic_pattern_alt = self.get_value(line, 594, 4)
         if record_type == self.ATT:
             return
         if record_type == self.RWY:
@@ -141,6 +143,12 @@ class APT(BaseData):
             rwy["left_threshold"]["lon"] = parse_coordinates(self.get_value(line, 116, 15))
             rwy["left_threshold"]["dthr_lon"] = parse_coordinates(self.get_value(line, 184, 15))
             rwy["left_threshold"]["threshold_dist"] = float(self.get_value(line, 218, 4)) * 0.3048 if self.get_value(line, 218, 4) else None
+            l_pattern = self.get_value(line, 82, 1)
+            lp = "L"
+            if l_pattern == "Y":
+                lp = "R"
+            rwy["left_threshold"]["pattern"] = {"pattern": lp, "altitude": self.traffic_pattern_alt}
+
             rwy["right_threshold"]["ident"] = self.get_value(line, 288, 3)
             rwy["right_threshold"]["geo_orientation"] = self.get_value(line, 291, 3)
             rwy["right_threshold"]["ils_cat"] = self.get_value(line, 294, 10)
@@ -150,6 +158,11 @@ class APT(BaseData):
             rwy["right_threshold"]["lon"] = parse_coordinates(self.get_value(line, 338, 15))
             rwy["right_threshold"]["dthr_lon"] = parse_coordinates(self.get_value(line, 406, 15))
             rwy["right_threshold"]["threshold_dist"] = float(self.get_value(line, 440, 4)) * 0.3048 if self.get_value(line, 440, 4) else None
+            r_pattern = self.get_value(line, 304, 1)
+            rp = "L"
+            if r_pattern == "Y":
+                rp = "R"
+            rwy["right_threshold"]["pattern"] = {"pattern": rp, "altitude": self.traffic_pattern_alt}
             try:
                 rwy["left_threshold"]["tora"] = float(self.get_value(line, 699, 5)) * 0.3048
             except ValueError:
